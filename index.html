@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>¿Quieres salir conmigo?</title>
+
+  <meta
+    name="description"
+    content="Una pequeña pregunta importante ❤️"
+  >
+
+  <!-- CSS externo -->
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- =====================================================
+       CORAZONES DECORATIVOS
+       ===================================================== -->
+
+  <div class="heart heart-1">💕</div>
+  <div class="heart heart-2">💗</div>
+  <div class="heart heart-3">💖</div>
+  <div class="heart heart-4">💕</div>
+
+
+  <!-- =====================================================
+       CONTENEDOR PRINCIPAL
+       ===================================================== -->
+
+  <main
+    class="container"
+    id="main-card"
+  >
+
+
+    <!-- ===================================================
+         PANTALLA 1 — PREGUNTA INICIAL
+         =================================================== -->
+
+    <section
+      class="screen active"
+      id="screen-inicio"
+    >
+
+      <div class="gif-container">
+
+        <!-- GIF LOCAL -->
+        <img
+          id="cat-gif"
+          src="calico-cat-cute.gif"
+          alt="Gatito amoroso"
+        >
+
+      </div>
+
+
+      <h1>
+        ¿Quieres salir conmigo?
+      </h1>
+
+
+      <div class="buttons">
+
+        <button
+          type="button"
+          id="btn-si"
+        >
+          Sí
+        </button>
+
+
+        <button
+          type="button"
+          id="btn-no"
+        >
+          No
+        </button>
+
+      </div>
+
+    </section>e
+
+
+    <!-- ===================================================
+         PANTALLA 2 — FECHA
+         =================================================== -->
+
+    <section
+      class="screen"
+      id="screen-fecha"
+    >
+
+      <div class="gif-container">
+
+        <!-- GIF LOCAL -->
+        <img
+          src="cat-peek-a-boo.gif"
+          alt="Gatito feliz"
+        >
+
+      </div>
+
+
+      <h2>
+        🥰 ¡Sabía que dirías que sí!
+      </h2>
+
+
+      <p class="subtitle">
+        Ahora elige el día de nuestra cita 💕
+      </p>
+
+
+      <div class="calendar-wrapper">
+
+        <label
+          class="calendar-label"
+          for="fecha-cita"
+        >
+          📅 ¿Qué día nos vemos?
+        </label>
+
+
+        <input
+          type="date"
+          id="fecha-cita"
+        >
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn-principal"
+        id="btn-continuar-fecha"
+        disabled
+      >
+        Elegir horario 💕
+      </button>
+
+    </section>
+
+
+    <!-- ===================================================
+         PANTALLA 3 — HORARIO
+         =================================================== -->
+
+    <section
+      class="screen"
+      id="screen-horario"
+    >
+
+      <div class="gif-container">
+
+        <!-- GIF LOCAL -->
+        <img
+          src="gato-inicio.gif"
+          alt="Gatito"
+        >
+
+      </div>
+
+
+      <h2>
+        🕐 ¿A qué hora?
+      </h2>
+
+
+      <p class="subtitle">
+        Elige el horario que te venga mejor 💗
+      </p>
+
+
+      <div class="time-grid">
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="10:00"
+        >
+          ☀️ 10:00
+        </button>
+
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="12:00"
+        >
+          ☀️ 12:00
+        </button>
+
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="15:00"
+        >
+          🌤️ 15:00
+        </button>
+
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="17:00"
+        >
+          🌅 17:00
+        </button>
+
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="19:00"
+        >
+          🌙 19:00
+        </button>
+
+
+        <button
+          type="button"
+          class="time-btn"
+          data-time="21:00"
+        >
+          🌙 21:00
+        </button>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn-principal"
+        id="btn-continuar-horario"
+        disabled
+      >
+        Elegir actividad 💕
+      </button>
+
+
+      <button
+        type="button"
+        class="btn-secundario"
+        id="btn-volver-fecha"
+      >
+        ← Cambiar fecha
+      </button>
+
+    </section>
+
+
+    <!-- ===================================================
+         PANTALLA 4 — ACTIVIDAD
+         =================================================== -->
+
+    <section
+      class="screen"
+      id="screen-actividad"
+    >
+
+      <div class="gif-container">
+
+        <!-- GIF LOCAL -->
+        <img
+          src="gato-inicio.gif"
+          alt="Gatito"
+        >
+
+      </div>
+
+
+      <h2>
+        🎯 ¿Qué hacemos?
+      </h2>
+
+
+      <p class="subtitle">
+        Elige el plan para nuestra cita 💗
+      </p>
+
+
+      <div class="activities">
+
+
+        <!-- CINE -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Cine"
+        >
+
+          <span class="emoji">
+            🎬
+          </span>
+
+          <span>
+            Cine
+          </span>
+
+        </button>
+
+
+        <!-- COMER -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Comer algo"
+        >
+
+          <span class="emoji">
+            🍕
+          </span>
+
+          <span>
+            Comer algo
+          </span>
+
+        </button>
+
+
+        <!-- PICNIC -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Picnic"
+        >
+
+          <span class="emoji">
+            🧺
+          </span>
+
+          <span>
+            Picnic
+          </span>
+
+        </button>
+
+
+        <!-- CAFÉ -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Café"
+        >
+
+          <span class="emoji">
+            ☕
+          </span>
+
+          <span>
+            Café
+          </span>
+
+        </button>
+
+
+        <!-- PARQUE -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Parque de diversiones"
+        >
+
+          <span class="emoji">
+            🎢
+          </span>
+
+          <span>
+            Parque de diversiones
+          </span>
+
+        </button>
+
+
+        <!-- SORPRÉNDEME -->
+
+        <button
+          type="button"
+          class="activity-btn"
+          data-activity="Sorpréndeme"
+        >
+
+          <span class="emoji">
+            🎁
+          </span>
+
+          <span>
+            Sorpréndeme
+          </span>
+
+        </button>
+
+      </div>
+
+
+      <button
+        type="button"
+        class="btn-principal"
+        id="btn-confirmar-actividad"
+        disabled
+      >
+        Confirmar cita 💕
+      </button>
+
+
+      <button
+        type="button"
+        class="btn-secundario"
+        id="btn-volver-horario"
+      >
+        ← Cambiar horario
+      </button>
+
+    </section>
+
+
+    <!-- ===================================================
+         PANTALLA 5 — CONFIRMACIÓN
+         =================================================== -->
+
+    <section
+      class="screen"
+      id="screen-confirmacion"
+    >
+
+      <div class="gif-container">
+
+        <!-- GIF LOCAL -->
+        <img
+          src="gato-feliz.gif"
+          alt="Gatito feliz"
+        >
+
+      </div>
+
+
+      <h2>
+        ¡Cita confirmada! ❤️
+      </h2>
+
+
+      <p class="subtitle">
+        Ya está decidido.
+        Ahora no hay vuelta atrás 😌❤️
+      </p>
+
+
+      <!-- ================================================
+           RESUMEN DE LA CITA
+           ================================================ -->
+
+      <div class="confirmation">
+
+        <div class="confirmation-title">
+          💌 Detalles de nuestra cita
+        </div>
+
+
+        <!-- FECHA -->
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            📅 FECHA
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmacion-fecha"
+          >
+            —
+          </span>
+
+        </div>
+
+
+        <!-- HORA -->
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            🕐 HORA
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmacion-hora"
+          >
+            —
+          </span>
+
+        </div>
+
+
+        <!-- ACTIVIDAD -->
+
+        <div class="confirmation-row">
+
+          <span class="confirmation-label">
+            🎯 ACTIVIDAD
+          </span>
+
+          <span
+            class="confirmation-value"
+            id="confirmacion-actividad"
+          >
+            —
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           CARTA DE AMOR
+           ================================================= -->
+
+      <div
+        class="love-letter"
+        id="love-letter"
+      >
+
+        <div class="love-letter-title">
+          🌹 Una pequeña carta de amor
+        </div>
+
+
+        <p>
+          Las rosas son rojas,<br>
+          las violetas azules,<br>
+          dijiste que sí...
+          así que ahora no hay excusas. 😂
+        </p>
+
+
+        <p>
+          La fecha está elegida,<br>
+          el plan está genial,<br>
+          así que prepárate...
+          <strong>
+            ¡nuestra cita va a ser espectacular! ❤️
+          </strong>
+        </p>
+
+
+        <span class="firma">
+          Atentamente:<br>
+          el responsable de esta
+          maravillosa idea 😌💕
+        </span>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       ALERTA PRINCIPAL
+       Se utiliza para:
+       - mensajes del botón No
+       - mensaje después de pulsar Sí
+       ===================================================== -->
+
+  <div
+    class="custom-alert-overlay"
+    id="custom-alert"
+  >
+
+    <div class="custom-alert-box">
+
+      <h2 id="alert-title">
+        ❤️ ¡Lo sabía! ❤️
+      </h2>
+
+
+      <p id="alert-message">
+        Yo sé que querías darle que sí 😏
+      </p>
+
+
+      <button
+        type="button"
+        class="alert-button"
+        id="btn-cerrar-alert"
+      >
+        Aceptar
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ALERTA DE LA CARTA
+       ===================================================== -->
+
+  <div
+    class="custom-alert-overlay"
+    id="love-alert"
+  >
+
+    <div class="custom-alert-box">
+
+      <h2>
+        💌 ¡Espera!
+      </h2>
+
+
+      <p>
+        Hay una última cosa que tienes
+        que leer... 👀❤️
+      </p>
+
+
+      <button
+        type="button"
+        id="btn-abrir-carta"
+      >
+        Abrir carta 💕
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       ALERTA DE ERROR
+       ===================================================== -->
+
+  <div
+    class="custom-alert-overlay"
+    id="save-error-alert"
+  >
+
+    <div class="custom-alert-box">
+
+      <h2>
+        😿 Ups...
+      </h2>
+
+
+      <p>
+        Ha ocurrido un problema guardando
+        la cita. Inténtalo otra vez.
+      </p>
+
+
+      <button
+        type="button"
+        class="alert-button"
+        id="btn-cerrar-error"
+      >
+        Intentar de nuevo
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT EXTERNO
+       ===================================================== -->
+
+  <script
+    src="script.js"
+    defer
+  ></script
+
+</body>
+
+</html>
