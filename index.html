@@ -3,767 +3,209 @@
 
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>¿Quieres salir conmigo?</title>
-
-  <meta
-    name="description"
-    content="Una pequeña pregunta importante ❤️"
-  >
-
-  <!-- CSS externo -->
-  <link
-    rel="stylesheet"
-    href="styles.css"
-  >
+  <meta name="description" content="Una pequeña pregunta importante ❤️">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 
 <body>
 
-  <!-- =====================================================
-       CORAZONES DECORATIVOS
-       ===================================================== -->
-
+  <!-- CORAZONES DECORATIVOS -->
   <div class="heart heart-1">💕</div>
   <div class="heart heart-2">💗</div>
   <div class="heart heart-3">💖</div>
   <div class="heart heart-4">💕</div>
 
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="container" id="main-card">
 
-  <!-- =====================================================
-       CONTENEDOR PRINCIPAL
-       ===================================================== -->
-
-  <main
-    class="container"
-    id="main-card"
-  >
-
-
-    <!-- ===================================================
-         PANTALLA 1 — PREGUNTA INICIAL
-         =================================================== -->
-
-    <section
-      class="screen active"
-      id="screen-inicio"
-    >
-
+    <!-- PANTALLA 1 — PREGUNTA INICIAL -->
+    <section class="screen active" id="screen-inicio">
       <div class="gif-container">
-
-        <!-- GIF LOCAL -->
-        <img
-          id="cat-gif"
-          src="calico-cat-cute.gif"
-          alt="Gatito amoroso"
-        >
-
+        <img id="cat-gif" src="calico-cat-cute.gif" alt="Gatito amoroso">
       </div>
 
+      <h1>¿Quieres salir conmigo?</h1>
 
-      <h1>
-        ¿Quieres salir conmigo?
-      </h1>
-
+      <div class="user-inputs">
+        <input 
+          type="text" 
+          id="user-name" 
+          placeholder="Tu nombre 💕" 
+          required
+        >
+      </div>
 
       <div class="buttons">
-
-        <button
-          type="button"
-          id="btn-si"
-        >
-          Sí
-        </button>
-
-
-        <button
-          type="button"
-          id="btn-no"
-        >
-          No
-        </button>
-
+        <button type="button" id="btn-si">Sí</button>
+        <button type="button" id="btn-no">No</button>
       </div>
-
     </section>
 
-
-    <!-- ===================================================
-         PANTALLA 2 — FECHA
-         =================================================== -->
-
-    <section
-      class="screen"
-      id="screen-fecha"
-    >
-
+    <!-- PANTALLA 2 — FECHA -->
+    <section class="screen" id="screen-fecha">
       <div class="gif-container">
-
-        <!-- GIF LOCAL -->
-        <img
-          src="cat-peek-a-boo.gif"
-          alt="Gatito feliz"
-        >
-
+        <img src="cat-peek-a-boo.gif" alt="Gatito feliz">
       </div>
 
-
-      <h2>
-        🥰 ¡Sabía que dirías que sí!
-      </h2>
-
-
-      <p class="subtitle">
-        Ahora elige el día de nuestra cita 💕
-      </p>
-
+      <h2>🥰 ¡Sabía que dirías que sí!</h2>
+      <p class="subtitle">Ahora elige el día de nuestra cita 💕</p>
 
       <div class="calendar-wrapper">
-
-        <label
-          class="calendar-label"
-          for="fecha-cita"
-        >
-          📅 ¿Qué día nos vemos?
-        </label>
-
-
-        <input
-          type="date"
-          id="fecha-cita"
-        >
-
+        <label class="calendar-label" for="fecha-cita">📅 ¿Qué día nos vemos?</label>
+        <input type="date" id="fecha-cita">
       </div>
 
-
-      <button
-        type="button"
-        class="btn-principal"
-        id="btn-continuar-fecha"
-        disabled
-      >
+      <button type="button" class="btn-principal" id="btn-continuar-fecha" disabled>
         Elegir horario 💕
       </button>
-
     </section>
 
-
-    <!-- ===================================================
-         PANTALLA 3 — HORARIO
-         =================================================== -->
-
-    <section
-      class="screen"
-      id="screen-horario"
-    >
-
+    <!-- PANTALLA 3 — HORARIO -->
+    <section class="screen" id="screen-horario">
       <div class="gif-container">
-
-        <!-- GIF LOCAL -->
-        <img
-          src="happy-cat.gif"
-          alt="Gatito"
-        >
-
+        <img src="happy-cat.gif" alt="Gatito">
       </div>
 
-
-      <h2>
-        🕐 ¿A qué hora?
-      </h2>
-
-
-      <p class="subtitle">
-        Elige el horario que te venga mejor 💗
-      </p>
-
+      <h2>🕐 ¿A qué hora?</h2>
+      <p class="subtitle">Elige el horario que te venga mejor 💗</p>
 
       <div class="time-grid">
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="10:00"
-        >
-          ☀️ 10:00
-        </button>
-
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="12:00"
-        >
-          ☀️ 12:00
-        </button>
-
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="15:00"
-        >
-          🌤️ 15:00
-        </button>
-
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="17:00"
-        >
-          🌅 17:00
-        </button>
-
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="19:00"
-        >
-          🌙 19:00
-        </button>
-
-
-        <button
-          type="button"
-          class="time-btn"
-          data-time="21:00"
-        >
-          🌙 21:00
-        </button>
-
+        <button type="button" class="time-btn" data-time="10:00">☀️ 10:00</button>
+        <button type="button" class="time-btn" data-time="12:00">☀️ 12:00</button>
+        <button type="button" class="time-btn" data-time="15:00">🌤️ 15:00</button>
+        <button type="button" class="time-btn" data-time="17:00">🌅 17:00</button>
+        <button type="button" class="time-btn" data-time="19:00">🌙 19:00</button>
+        <button type="button" class="time-btn" data-time="21:00">🌙 21:00</button>
       </div>
 
-
-      <button
-        type="button"
-        class="btn-principal"
-        id="btn-continuar-horario"
-        disabled
-      >
+      <button type="button" class="btn-principal" id="btn-continuar-horario" disabled>
         Elegir actividad 💕
       </button>
 
-
-      <button
-        type="button"
-        class="btn-secundario"
-        id="btn-volver-fecha"
-      >
+      <button type="button" class="btn-secundario" id="btn-volver-fecha">
         ← Cambiar fecha
       </button>
-
     </section>
 
-
-    <!-- ===================================================
-         PANTALLA 4 — ACTIVIDAD
-         =================================================== -->
-
-    <section
-      class="screen"
-      id="screen-actividad"
-    >
-
+    <!-- PANTALLA 4 — ACTIVIDAD -->
+    <section class="screen" id="screen-actividad">
       <div class="gif-container">
-
-        <!-- GIF LOCAL -->
-        <img
-          src="catto.gif"
-          alt="Gatito"
-        >
-
+        <img src="catto.gif" alt="Gatito">
       </div>
 
-
-      <h2>
-        🎯 ¿Qué hacemos?
-      </h2>
-
-
-      <p class="subtitle">
-        Elige el plan para nuestra cita 💗
-      </p>
-
+      <h2>🎯 ¿Qué hacemos?</h2>
+      <p class="subtitle">Elige el plan para nuestra cita 💗</p>
 
       <div class="activities">
-
-
-        <!-- =================================================
-             1. MUSEO
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Conocer un museo"
-        >
-
-          <span class="emoji">
-            🏛️
-          </span>
-
-          <span>
-            Conocer un museo
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Conocer un museo">
+          <span class="emoji">🏛️</span> <span>Conocer un museo</span>
         </button>
 
-
-        <!-- =================================================
-             2. JARDÍN BOTÁNICO
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Jardín botánico"
-        >
-
-          <span class="emoji">
-            🌿
-          </span>
-
-          <span>
-            Jardín botánico
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Jardín botánico">
+          <span class="emoji">🌿</span> <span>Jardín botánico</span>
         </button>
 
-
-        <!-- =================================================
-             3. PARQUE DE DIVERSIONES
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Parque de diversiones"
-        >
-
-          <span class="emoji">
-            🎢
-          </span>
-
-          <span>
-            Parque de diversiones
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Parque de diversiones">
+          <span class="emoji">🎢</span> <span>Parque de diversiones</span>
         </button>
 
-
-        <!-- =================================================
-             4. RESTAURANTE
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Conocer un nuevo restaurante"
-        >
-
-          <span class="emoji">
-            🍽️
-          </span>
-
-          <span>
-            Conocer un nuevo restaurante
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Conocer un nuevo restaurante">
+          <span class="emoji">🍽️</span> <span>Conocer un nuevo restaurante</span>
         </button>
 
-
-        <!-- =================================================
-             5. PLANETARIO
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Ir al planetario"
-        >
-
-          <span class="emoji">
-            🌌
-          </span>
-
-          <span>
-            Ir al planetario
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Ir al planetario">
+          <span class="emoji">🌌</span> <span>Ir al planetario</span>
         </button>
 
-
-        <!-- =================================================
-             6. CAMINAR — PLAN 7MAZO
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Caminar - Plan 7Mazo"
-        >
-
-          <span class="emoji">
-            🚶
-          </span>
-
-          <span>
-            Caminar — Plan 7Mazo
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Caminar - Plan 7Mazo">
+          <span class="emoji">🚶</span> <span>Caminar — Plan 7Mazo</span>
         </button>
 
-
-        <!-- =================================================
-             7. PICNIC SIMÓN BOLÍVAR
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Plan picnic con carpa en el Simón Bolívar"
-        >
-
-          <span class="emoji">
-            ⛺
-          </span>
-
-          <span>
-            Plan picnic con carpa
-            en el Simón Bolívar
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Plan picnic con carpa en el Simón Bolívar">
+          <span class="emoji">⛺</span> <span>Plan picnic con carpa en el Simón Bolívar</span>
         </button>
 
-
-        <!-- =================================================
-             8. ARRUNCHIS
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Arrunchis"
-        >
-
-          <span class="emoji">
-            🥰
-          </span>
-
-          <span>
-            Arrunchis
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Arrunchis">
+          <span class="emoji">🥰</span> <span>Arrunchis</span>
         </button>
 
-
-        <!-- =================================================
-             9. SORPRÉNDEME
-             ================================================= -->
-
-        <button
-          type="button"
-          class="activity-btn"
-          data-activity="Sorpréndeme"
-        >
-
-          <span class="emoji">
-            🎁
-          </span>
-
-          <span>
-            Sorpréndeme
-          </span>
-
+        <button type="button" class="activity-btn" data-activity="Sorpréndeme">
+          <span class="emoji">🎁</span> <span>Sorpréndeme</span>
         </button>
-
       </div>
 
-
-      <button
-        type="button"
-        class="btn-principal"
-        id="btn-confirmar-actividad"
-        disabled
-      >
+      <button type="button" class="btn-principal" id="btn-confirmar-actividad" disabled>
         Confirmar cita 💕
       </button>
 
-
-      <button
-        type="button"
-        class="btn-secundario"
-        id="btn-volver-horario"
-      >
+      <button type="button" class="btn-secundario" id="btn-volver-horario">
         ← Cambiar horario
       </button>
-
     </section>
 
-
-    <!-- ===================================================
-         PANTALLA 5 — CONFIRMACIÓN
-         =================================================== -->
-
-    <section
-      class="screen"
-      id="screen-confirmacion"
-    >
-
+    <!-- PANTALLA 5 — CONFIRMACIÓN -->
+    <section class="screen" id="screen-confirmacion">
       <div class="gif-container">
-
-        <!-- GIF LOCAL -->
-        <img
-          src="screaming-cat-cat.gif"
-          alt="Gatito feliz"
-        >
-
+        <img src="screaming-cat-cat.gif" alt="Gatito feliz">
       </div>
 
-
-      <h2>
-        ¡Cita confirmada! ❤️
-      </h2>
-
-
-      <p class="subtitle">
-        Ya está decidido.
-        Ahora no hay vuelta atrás 😌❤️
-      </p>
-
-
-      <!-- ================================================
-           RESUMEN DE LA CITA
-           ================================================ -->
+      <h2>¡Cita confirmada! ❤️</h2>
+      <p class="subtitle">Ya está decidido. Ahora no hay vuelta atrás 😌❤️</p>
 
       <div class="confirmation">
-
-        <div class="confirmation-title">
-          💌 Detalles de nuestra cita
-        </div>
-
-
-        <!-- FECHA -->
+        <div class="confirmation-title">💌 Detalles de nuestra cita</div>
 
         <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            📅 FECHA
-          </span>
-
-          <span
-            class="confirmation-value"
-            id="confirmacion-fecha"
-          >
-            —
-          </span>
-
+          <span class="confirmation-label">👤 PARA</span>
+          <span class="confirmation-value" id="confirmacion-nombre">—</span>
         </div>
-
-
-        <!-- HORA -->
 
         <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            🕐 HORA
-          </span>
-
-          <span
-            class="confirmation-value"
-            id="confirmacion-hora"
-          >
-            —
-          </span>
-
+          <span class="confirmation-label">📅 FECHA</span>
+          <span class="confirmation-value" id="confirmacion-fecha">—</span>
         </div>
-
-
-        <!-- ACTIVIDAD -->
 
         <div class="confirmation-row">
-
-          <span class="confirmation-label">
-            🎯 ACTIVIDAD
-          </span>
-
-          <span
-            class="confirmation-value"
-            id="confirmacion-actividad"
-          >
-            —
-          </span>
-
+          <span class="confirmation-label">🕐 HORA</span>
+          <span class="confirmation-value" id="confirmacion-hora">—</span>
         </div>
 
+        <div class="confirmation-row">
+          <span class="confirmation-label">🎯 ACTIVIDAD</span>
+          <span class="confirmation-value" id="confirmacion-actividad">—</span>
+        </div>
       </div>
 
-
-      <!-- =================================================
-           CARTA DE AMOR
-           ================================================= -->
-
-      <div
-        class="love-letter"
-        id="love-letter"
-      >
-
-        <div class="love-letter-title">
-          🌹 Una pequeña carta de amor
-        </div>
-
-
-        <p>
-          Las rosas son rojas,<br>
-          las violetas azules,<br>
-          dijiste que sí...
-          así que ahora no hay excusas. 😂
-        </p>
-
-
-        <p>
-          La fecha está elegida,<br>
-          el plan está genial,<br>
-          así que prepárate...
-          <strong>
-            ¡nuestra cita va a ser espectacular! ❤️
-          </strong>
-        </p>
-
-
-        <span class="firma">
-          Atentamente:<br>
-          el responsable de esta
-          maravillosa idea 😌💕
-        </span>
-
+      <div class="love-letter" id="love-letter">
+        <div class="love-letter-title">🌹 Una pequeña carta de amor</div>
+        <p>Las rosas son rojas,<br>las violetas azules,<br>dijiste que sí... así que ahora no hay excusas. 😂</p>
+        <p>La fecha está elegida,<br>el plan está genial,<br>así que prepárate... <strong>¡nuestra cita va a ser espectacular! ❤️</strong></p>
+        <span class="firma">Atentamente:<br>el responsable de esta maravillosa idea 😌💕</span>
       </div>
-
     </section>
 
   </main>
 
-
-  <!-- =====================================================
-       ALERTA PRINCIPAL
-       ===================================================== -->
-
-  <div
-    class="custom-alert-overlay"
-    id="custom-alert"
-  >
-
+  <!-- ALERTAS/MODALES -->
+  <div class="custom-alert-overlay" id="custom-alert">
     <div class="custom-alert-box">
-
-      <h2 id="alert-title">
-        ❤️ ¡Lo sabía! ❤️
-      </h2>
-
-
-      <p id="alert-message">
-        Yo sé que querías darle que sí 😏
-      </p>
-
-
-      <button
-        type="button"
-        class="alert-button"
-        id="btn-cerrar-alert"
-      >
-        Aceptar
-      </button>
-
+      <h2 id="alert-title">❤️ ¡Lo sabía! ❤️</h2>
+      <p id="alert-message">Yo sé que querías darle que sí 😏</p>
+      <button type="button" class="alert-button" id="btn-cerrar-alert">Aceptar</button>
     </div>
-
   </div>
 
-
-  <!-- =====================================================
-       ALERTA DE LA CARTA
-       ===================================================== -->
-
-  <div
-    class="custom-alert-overlay"
-    id="love-alert"
-  >
-
+  <div class="custom-alert-overlay" id="love-alert">
     <div class="custom-alert-box">
-
-      <h2>
-        💌 ¡Espera!
-      </h2>
-
-
-      <p>
-        Hay una última cosa que tienes
-        que leer... 👀❤️
-      </p>
-
-
-      <button
-        type="button"
-        id="btn-abrir-carta"
-      >
-        Abrir carta 💕
-      </button>
-
+      <h2>💌 ¡Espera!</h2>
+      <p>Hay una última cosa que tienes que leer... 👀❤️</p>
+      <button type="button" id="btn-abrir-carta">Abrir carta 💕</button>
     </div>
-
   </div>
 
-
-  <!-- =====================================================
-       ALERTA DE ERROR
-       ===================================================== -->
-
-  <div
-    class="custom-alert-overlay"
-    id="save-error-alert"
-  >
-
-    <div class="custom-alert-box">
-
-      <h2>
-        😿 Ups...
-      </h2>
-
-
-      <p>
-        Ha ocurrido un problema guardando
-        la cita. Inténtalo otra vez.
-      </p>
-
-
-      <button
-        type="button"
-        class="alert-button"
-        id="btn-cerrar-error"
-      >
-        Intentar de nuevo
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       JAVASCRIPT EXTERNO
-       ===================================================== -->
-
-  <script
-    src="script.js"
-    defer
-  ></script>
-
+  <script src="script.js" defer></script>
 </body>
 
 </html>

@@ -3,6 +3,13 @@
 document.addEventListener("DOMContentLoaded", () => {
 
   /* =====================================================
+     API URL
+     ===================================================== */
+
+  const API_URL = "https://katzedates-api.advisorfonseca.workers.dev/api/citas";
+
+
+  /* =====================================================
      ELEMENTOS
      ===================================================== */
 
@@ -123,15 +130,14 @@ document.addEventListener("DOMContentLoaded", () => {
      FECHA MÍNIMA
      ===================================================== */
 
-  const hoy = new Date();
+  if (fechaCita) {
+    const hoy = new Date();
+    const year = hoy.getFullYear();
+    const month = String(hoy.getMonth() + 1).padStart(2, "0");
+    const day = String(hoy.getDate()).padStart(2, "0");
 
-  const year = hoy.getFullYear();
-
-  const month = String(hoy.getMonth() + 1).padStart(2, "0");
-
-  const day = String(hoy.getDate()).padStart(2, "0");
-
-  fechaCita.min = `${year}-${month}-${day}`;
+    fechaCita.min = `${year}-${month}-${day}`;
+  }
 
 
   /* =====================================================
@@ -227,163 +233,174 @@ document.addEventListener("DOMContentLoaded", () => {
      BOTÓN NO
      ===================================================== */
 
-  btnNo.addEventListener("click", () => {
+  if (btnNo) {
+    btnNo.addEventListener("click", () => {
 
-    console.log("❌ Se pulsó NO");
+      console.log("❌ Se pulsó NO");
 
-    /* Cambiar GIF */
+      /* Cambiar GIF */
 
-    catGif.src =
-      gifsGatosTristes[
-        contadorNo % gifsGatosTristes.length
-      ];
+      if (catGif) {
+        catGif.src =
+          gifsGatosTristes[
+            contadorNo % gifsGatosTristes.length
+          ];
+      }
 
-    /* Crecer SÍ */
+      /* Crecer SÍ */
 
-    siFontSize += 20;
-    siPaddingV += 10;
-    siPaddingH += 15;
+      siFontSize += 20;
+      siPaddingV += 10;
+      siPaddingH += 15;
 
-    btnSi.style.fontSize = `${siFontSize}px`;
-
-    btnSi.style.padding =
-      `${siPaddingV}px ${siPaddingH}px`;
-
-
-    /* Encoger NO */
-
-    noFontSize = Math.max(4, noFontSize - 10);
-    noPaddingV = Math.max(2, noPaddingV - 3);
-    noPaddingH = Math.max(5, noPaddingH - 5);
-
-    btnNo.style.fontSize = `${noFontSize}px`;
-
-    btnNo.style.padding =
-      `${noPaddingV}px ${noPaddingH}px`;
+      if (btnSi) {
+        btnSi.style.fontSize = `${siFontSize}px`;
+        btnSi.style.padding = `${siPaddingV}px ${siPaddingH}px`;
+      }
 
 
-    /* Mensaje */
+      /* Encoger NO */
 
-    mostrarAlerta(
-      "😿 ¡Gatito triste!",
-      mensajesNo[
-        contadorNo % mensajesNo.length
-      ]
-    );
+      noFontSize = Math.max(4, noFontSize - 10);
+      noPaddingV = Math.max(2, noPaddingV - 3);
+      noPaddingH = Math.max(5, noPaddingH - 5);
 
-    contadorNo++;
+      btnNo.style.fontSize = `${noFontSize}px`;
+      btnNo.style.padding = `${noPaddingV}px ${noPaddingH}px`;
 
-  });
+
+      /* Mensaje */
+
+      mostrarAlerta(
+        "😿 ¡Gatito triste!",
+        mensajesNo[
+          contadorNo % mensajesNo.length
+        ]
+      );
+
+      contadorNo++;
+
+    });
+  }
 
 
   /* =====================================================
      BOTÓN SÍ
      ===================================================== */
 
-  btnSi.addEventListener("click", () => {
+  if (btnSi) {
+    btnSi.addEventListener("click", () => {
 
-    console.log("✅ Se pulsó SÍ");
+      console.log("✅ Se pulsó SÍ");
 
-    aceptoLaCita = true;
+      aceptoLaCita = true;
 
-    catGif.src = gifGatoFeliz;
+      if (catGif) catGif.src = gifGatoFeliz;
 
-    lanzarCorazones();
+      lanzarCorazones();
 
-    mainCard.style.transform = "scale(0.96)";
+      mainCard.style.transform = "scale(0.96)";
 
-    setTimeout(() => {
-      mainCard.style.transform = "scale(1)";
-    }, 180);
+      setTimeout(() => {
+        mainCard.style.transform = "scale(1)";
+      }, 180);
 
-    mostrarAlerta(
-      "❤️ ¡Al cabo que ni quería! ❤️",
-      "Espera... ¿le dio a Sí? 😳 Waos, esto se está poniendo serio 😏💕"
-    );
+      mostrarAlerta(
+        "❤️ ¡Al cabo que ni quería! ❤️",
+        "Espera... ¿le dio a Sí? 😳 Waos, esto se está poniendo serio 😏💕"
+      );
 
-  });
+    });
+  }
 
 
   /* =====================================================
      CERRAR ALERTA
      ===================================================== */
 
-  btnCerrarAlert.addEventListener("click", () => {
+  if (btnCerrarAlert) {
+    btnCerrarAlert.addEventListener("click", () => {
 
-    console.log("🔘 Se cerró la alerta");
+      console.log("🔘 Se cerró la alerta");
 
-    cerrarAlerta();
+      cerrarAlerta();
 
-    if (aceptoLaCita) {
+      if (aceptoLaCita) {
+        mostrarPantalla(screenFecha);
+      }
 
-      mostrarPantalla(screenFecha);
-
-    }
-
-  });
+    });
+  }
 
 
   /* =====================================================
      CERRAR ALERTA HACIENDO CLICK FUERA
      ===================================================== */
 
-  customAlert.addEventListener("click", (event) => {
+  if (customAlert) {
+    customAlert.addEventListener("click", (event) => {
 
-    if (event.target === customAlert) {
+      if (event.target === customAlert) {
+        cerrarAlerta();
+      }
 
-      cerrarAlerta();
-
-    }
-
-  });
+    });
+  }
 
 
   /* =====================================================
      FECHA
      ===================================================== */
 
-  fechaCita.addEventListener("change", () => {
+  if (fechaCita) {
+    fechaCita.addEventListener("change", () => {
 
-    cita.fecha = fechaCita.value;
+      cita.fecha = fechaCita.value;
 
-    btnContinuarFecha.disabled =
-      !cita.fecha;
+      if (btnContinuarFecha) {
+        btnContinuarFecha.disabled = !cita.fecha;
+      }
 
-    console.log("📅 Fecha:", cita.fecha);
+      console.log("📅 Fecha:", cita.fecha);
 
-  });
+    });
+  }
 
 
   /* =====================================================
      CONTINUAR FECHA
      ===================================================== */
 
-  btnContinuarFecha.addEventListener("click", () => {
+  if (btnContinuarFecha) {
+    btnContinuarFecha.addEventListener("click", () => {
 
-    if (!cita.fecha) {
+      if (!cita.fecha) {
 
-      mostrarAlerta(
-        "📅 Falta la fecha",
-        "Primero tienes que elegir qué día nos vemos 💕"
-      );
+        mostrarAlerta(
+          "📅 Falta la fecha",
+          "Primero tienes que elegir qué día nos vemos 💕"
+        );
 
-      return;
-    }
+        return;
+      }
 
-    mostrarPantalla(screenHorario);
+      mostrarPantalla(screenHorario);
 
-  });
+    });
+  }
 
 
   /* =====================================================
      VOLVER A FECHA
      ===================================================== */
 
-  btnVolverFecha.addEventListener("click", () => {
+  if (btnVolverFecha) {
+    btnVolverFecha.addEventListener("click", () => {
 
-    mostrarPantalla(screenFecha);
+      mostrarPantalla(screenFecha);
 
-  });
+    });
+  }
 
 
   /* =====================================================
@@ -407,7 +424,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       cita.hora = button.dataset.time;
 
-      btnContinuarHorario.disabled = false;
+      if (btnContinuarHorario) {
+        btnContinuarHorario.disabled = false;
+      }
 
     });
 
@@ -418,32 +437,36 @@ document.addEventListener("DOMContentLoaded", () => {
      CONTINUAR HORARIO
      ===================================================== */
 
-  btnContinuarHorario.addEventListener("click", () => {
+  if (btnContinuarHorario) {
+    btnContinuarHorario.addEventListener("click", () => {
 
-    if (!cita.hora) {
+      if (!cita.hora) {
 
-      mostrarAlerta(
-        "🕐 Falta la hora",
-        "Elige un horario para continuar 💕"
-      );
+        mostrarAlerta(
+          "🕐 Falta la hora",
+          "Elige un horario para continuar 💕"
+        );
 
-      return;
-    }
+        return;
+      }
 
-    mostrarPantalla(screenActividad);
+      mostrarPantalla(screenActividad);
 
-  });
+    });
+  }
 
 
   /* =====================================================
      VOLVER AL HORARIO
      ===================================================== */
 
-  btnVolverHorario.addEventListener("click", () => {
+  if (btnVolverHorario) {
+    btnVolverHorario.addEventListener("click", () => {
 
-    mostrarPantalla(screenHorario);
+      mostrarPantalla(screenHorario);
 
-  });
+    });
+  }
 
 
   /* =====================================================
@@ -465,10 +488,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       button.classList.add("selected");
 
-      cita.actividad =
-        button.dataset.activity;
+      cita.actividad = button.dataset.activity;
 
-      btnConfirmarActividad.disabled = false;
+      if (btnConfirmarActividad) {
+        btnConfirmarActividad.disabled = false;
+      }
 
     });
 
@@ -479,69 +503,70 @@ document.addEventListener("DOMContentLoaded", () => {
      CONFIRMAR CITA
      ===================================================== */
 
-  btnConfirmarActividad.addEventListener("click", async () => {
+  if (btnConfirmarActividad) {
+    btnConfirmarActividad.addEventListener("click", async () => {
 
-    console.log("💌 Confirmando cita...");
+      console.log("💌 Confirmando cita...");
 
-    if (
-      !cita.fecha ||
-      !cita.hora ||
-      !cita.actividad
-    ) {
+      if (
+        !cita.fecha ||
+        !cita.hora ||
+        !cita.actividad
+      ) {
+        return;
+      }
 
-      return;
-    }
+      btnConfirmarActividad.disabled = true;
 
+      /*
+       * Mostramos los datos en pantalla.
+       */
 
-    btnConfirmarActividad.disabled = true;
+      if (confirmacionFecha) {
+        confirmacionFecha.textContent = formatearFecha(cita.fecha);
+      }
 
+      if (confirmacionHora) {
+        confirmacionHora.textContent = cita.hora;
+      }
 
-    /*
-     * Mostramos los datos.
-     */
+      if (confirmacionActividad) {
+        confirmacionActividad.textContent = cita.actividad;
+      }
 
-    confirmacionFecha.textContent =
-      formatearFecha(cita.fecha);
+      /*
+       * Guardado directo en Cloudflare Worker + D1.
+       */
 
-    confirmacionHora.textContent =
-      cita.hora;
+      const guardado = await guardarCita(cita);
 
-    confirmacionActividad.textContent =
-      cita.actividad;
+      if (!guardado) {
 
+        if (saveErrorAlert) {
+          saveErrorAlert.classList.add("show");
+        } else {
+          mostrarAlerta("Error", "No se pudo guardar la cita en el servidor.");
+        }
 
-    /*
-     * Guardado temporal.
-     *
-     * Lo sustituiremos por Cloudflare Worker + D1.
-     */
+        btnConfirmarActividad.disabled = false;
 
-    const guardado =
-      await guardarCita(cita);
+        return;
+      }
 
+      mostrarPantalla(screenConfirmacion);
 
-    if (!guardado) {
+      lanzarCorazones();
 
-      saveErrorAlert.classList.add("show");
+      setTimeout(() => {
 
-      btnConfirmarActividad.disabled = false;
+        if (loveAlert) {
+          loveAlert.classList.add("show");
+        }
 
-      return;
-    }
+      }, 1200);
 
-
-    mostrarPantalla(screenConfirmacion);
-
-    lanzarCorazones();
-
-
-    setTimeout(() => {
-
-      loveAlert.classList.add("show");
-
-    }, 1200);
-
-  });
+    });
+  }
 
 
   /* =====================================================
@@ -567,39 +592,50 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =====================================================
-     GUARDAR CITA
+     GUARDAR CITA (CLOUDFLARE WORKER + D1)
      ===================================================== */
 
   async function guardarCita(datos) {
 
     try {
 
-      /*
-       * Por ahora únicamente guardamos localmente.
-       *
-       * Más adelante:
-       *
-       * fetch("/api/citas", ...)
-       *
-       * hacia Cloudflare Worker.
-       */
+      // Crear timestamp ISO uniendo fecha y hora seleccionadas
+      const fechaHoraISO = new Date(`${datos.fecha}T${datos.hora}:00`).toISOString();
 
-      localStorage.setItem(
-        "ultimaCita",
-        JSON.stringify({
-          fecha: datos.fecha,
-          hora: datos.hora,
-          actividad: datos.actividad,
-          creadoEn: new Date().toISOString()
-        })
-      );
+      const payload = {
+        nombre: "KatzeDates User",
+        email: "katzedates@local.dev",
+        inicio: fechaHoraISO,
+        duracion_minutos: 60,
+        tipo: datos.actividad
+      };
+
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error("Error devuelto por la API:", errorData);
+        return false;
+      }
+
+      // Copia de respaldo local
+      localStorage.setItem("ultimaCita", JSON.stringify({
+        ...datos,
+        creadoEn: new Date().toISOString()
+      }));
 
       return true;
 
     } catch (error) {
 
       console.error(
-        "Error guardando la cita:",
+        "Error al conectar con Cloudflare Worker:",
         error
       );
 
@@ -613,35 +649,41 @@ document.addEventListener("DOMContentLoaded", () => {
      ABRIR CARTA
      ===================================================== */
 
-  btnAbrirCarta.addEventListener("click", () => {
+  if (btnAbrirCarta) {
+    btnAbrirCarta.addEventListener("click", () => {
 
-    loveAlert.classList.remove("show");
+      if (loveAlert) loveAlert.classList.remove("show");
 
-    loveLetter.classList.add("show");
+      if (loveLetter) {
+        loveLetter.classList.add("show");
 
-    setTimeout(() => {
+        setTimeout(() => {
 
-      loveLetter.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
-      });
+          loveLetter.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+          });
 
-      lanzarCorazones();
+          lanzarCorazones();
 
-    }, 150);
+        }, 150);
+      }
 
-  });
+    });
+  }
 
 
   /* =====================================================
      CERRAR ALERTA DE ERROR
      ===================================================== */
 
-  btnCerrarError.addEventListener("click", () => {
+  if (btnCerrarError) {
+    btnCerrarError.addEventListener("click", () => {
 
-    saveErrorAlert.classList.remove("show");
+      if (saveErrorAlert) saveErrorAlert.classList.remove("show");
 
-  });
+    });
+  }
 
 
   /* =====================================================
@@ -654,9 +696,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    customAlert.classList.remove("show");
-    loveAlert.classList.remove("show");
-    saveErrorAlert.classList.remove("show");
+    if (customAlert) customAlert.classList.remove("show");
+    if (loveAlert) loveAlert.classList.remove("show");
+    if (saveErrorAlert) saveErrorAlert.classList.remove("show");
 
   });
 
