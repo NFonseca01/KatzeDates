@@ -75,9 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
      ===================================================== */
 
   const gifsGatosTristes = [
-    "gato-triste-1.gif",
-    "gato-triste-2.gif",
-    "gato-triste-3.gif"
+    "cat-scream-cat-screaming.gif",
   ];
 
   const gifGatoFeliz = "gato-feliz.gif";
