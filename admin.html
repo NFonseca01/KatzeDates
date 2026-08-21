@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KatzeDates - Control de Citas 🐾</title>
+
+  <!-- PROTECCIÓN DE RUTA DE ADMINISTRADOR -->
+  <script>
+    if (sessionStorage.getItem('katzedates_admin_auth') !== 'true') {
+      window.location.href = 'index.html';
+    }
+  </script>
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-slate-50 font-sans text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- TOP BAR -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-sm">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="bg-rose-500 text-white p-2.5 rounded-2xl shadow-md shadow-rose-500/20 flex items-center justify-center">
+          <i class="fa-solid fa-heart text-xl"></i>
+        </div>
+        <div>
+          <h1 class="font-extrabold text-xl text-slate-900 tracking-tight">KatzeDates</h1>
+          <p class="text-xs text-slate-500 font-medium">Control Visual de Respuestas ❤️</p>
+        </div>
+      </div>
+
+      <div class="flex items-center space-x-3">
+        <button onclick="cerrarSesionAdmin()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 transition-colors">
+          <i class="fa-solid fa-right-from-bracket text-xs"></i>
+          <span class="hidden sm:inline">Cerrar Sesión</span>
+        </button>
+        <button onclick="exportData()" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-sm font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 transition-colors border border-rose-200/60">
+          <i class="fa-solid fa-download text-xs"></i>
+          <span class="hidden sm:inline">Exportar JSON</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6">
+
+    <!-- BUSCADOR Y MÉTRICA -->
+    <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 shadow-sm flex flex-col sm:flex-row gap-4 items-center justify-between">
+      <div class="relative w-full sm:w-96">
+        <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+        <input type="text" id="search-input" onkeyup="renderTable()" placeholder="Buscar por nombre o actividad..." class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 text-sm bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 transition-all">
+      </div>
+
+      <div class="text-xs text-slate-500 font-semibold flex items-center gap-2">
+        <span>Citas confirmadas:</span>
+        <span id="total-count" class="bg-rose-100 text-rose-800 px-2.5 py-0.5 rounded-full font-bold">0</span>
+      </div>
+    </div>
+
+    <!-- TABLA DE RESULTADOS DE LECTURA -->
+    <div class="bg-white rounded-2xl border border-slate-200/80 shadow-sm overflow-hidden">
+      <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="bg-slate-50/80 border-b border-slate-200 text-[11px] uppercase tracking-wider font-bold text-slate-500">
+              <th class="py-3.5 px-5">Persona</th>
+              <th class="py-3.5 px-5">Plan Elegido</th>
+              <th class="py-3.5 px-5">Fecha & Hora</th>
+              <th class="py-3.5 px-5 text-right">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="appointments-tbody" class="divide-y divide-slate-100 text-sm">
+            <!-- Filas dinámicas generadas desde API -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ESTADO VACÍO -->
+      <div id="empty-state" class="hidden py-12 px-4 text-center">
+        <div class="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center mx-auto mb-3 text-rose-500 text-2xl">
+          <i class="fa-solid fa-heart-crack"></i>
+        </div>
+        <h3 class="text-base font-bold text-slate-800">Aún no hay respuestas</h3>
+        <p class="text-slate-500 text-xs mt-1">Las citas confirmadas desde la invitación pública aparecerán aquí.</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_URL = "https://katzedates-api.advisorfonseca.workers.dev/api/citas";
+    let appointments = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAppointments();
+    });
+
+    async function loadAppointments() {
+      try {
+        const response = await fetch(API_URL);
+        if (response.ok) {
+          const data = await response.json();
+          // Asegurarse de adaptar según el envoltorio de la API (array directo o { data: [] })
+          appointments = Array.isArray(data) ? data : (data.citas || data.data || []);
+        } else {
+          appointments = [];
+        }
+      } catch (e) {
+        console.error("Error al cargar citas de la API:", e);
+        appointments = [];
+      }
+      renderTable();
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('appointments-tbody');
+      const emptyState = document.getElementById('empty-state');
+      const totalCount = document.getElementById('total-count');
+      const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+
+      tbody.innerHTML = '';
+
+      const filtered = appointments.filter(app => {
+        const nombre = (app.nombre || app.name || '').toLowerCase();
+        const actividad = (app.tipo || app.actividad || app.activity || '').toLowerCase();
+        return nombre.includes(searchQuery) || actividad.includes(searchQuery);
+      });
+
+      totalCount.innerText = appointments.length;
+
+      if (filtered.length === 0) {
+        emptyState.classList.remove('hidden');
+      } else {
+        emptyState.classList.add('hidden');
+
+        filtered.forEach(app => {
+          const id = app.id;
+          const persona = app.nombre || app.name || 'Anónimo';
+          const plan = app.tipo || app.actividad || app.activity || 'No definida';
+          const isoDate = app.inicio || app.date;
+          
+          const { fecha, hora } = parseDateTime(isoDate, app.hora || app.time);
+
+          const tr = document.createElement('tr');
+          tr.className = 'hover:bg-slate-50/80 transition-colors';
+
+          tr.innerHTML = `
+            <td class="py-4 px-5">
+              <div class="font-bold text-slate-900">${escapeHtml(persona)}</div>
+            </td>
+            <td class="py-4 px-5">
+              <span class="inline-flex items-center gap-1.5 text-xs font-semibold bg-rose-50 text-rose-800 px-3 py-1 rounded-full border border-rose-200/60">
+                🎯 ${escapeHtml(plan)}
+              </span>
+            </td>
+            <td class="py-4 px-5 whitespace-nowrap">
+              <div class="font-medium text-slate-800"><i class="fa-regular fa-calendar text-slate-400 mr-1.5"></i>${fecha}</div>
+              <div class="text-xs text-slate-500 mt-0.5"><i class="fa-regular fa-clock text-slate-400 mr-1.5"></i>${hora} hs</div>
+            </td>
+            <td class="py-4 px-5 text-right whitespace-nowrap">
+              <button onclick="deleteAppointment('${id}')" title="Borrar registro" class="p-1.5 rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors">
+                <i class="fa-solid fa-trash-can text-base"></i>
+              </button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+    }
+
+    async function deleteAppointment(id) {
+      if (!id || id === 'undefined') {
+        alert("No se puede eliminar un registro sin ID válido.");
+        return;
+      }
+
+      if (confirm('¿Deseas eliminar este registro?')) {
+        try {
+          const res = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+          if (res.ok) {
+            appointments = appointments.filter(a => a.id !== id);
+            renderTable();
+          } else {
+            alert("No se pudo eliminar el registro en el servidor.");
+          }
+        } catch (e) {
+          console.error("Error al eliminar cita:", e);
+          alert("Error al conectar con la API para borrar el registro.");
+        }
+      }
+    }
+
+    function exportData() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appointments, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `respuestas_cita_${new Date().toISOString().split('T')[0]}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function cerrarSesionAdmin() {
+      sessionStorage.removeItem('katzedates_admin_auth');
+      window.location.href = 'index.html';
+    }
+
+    function parseDateTime(isoString, horaFallback) {
+      if (!isoString) return { fecha: '—', hora: horaFallback || '--:--' };
+      
+      try {
+        const d = new Date(isoString);
+        if (isNaN(d.getTime())) {
+          return { fecha: isoString, hora: horaFallback || '--:--' };
+        }
+        const day = String(d.getDate()).padStart(2, '0');
+        const month = String(d.getMonth() + 1).padStart(2, '0');
+        const year = d.getFullYear();
+        const hours = String(d.getHours()).padStart(2, '0');
+        const minutes = String(d.getMinutes()).padStart(2, '0');
+
+        return {
+          fecha: `${day}/${month}/${year}`,
+          hora: `${hours}:${minutes}`
+        };
+      } catch (e) {
+        return { fecha: isoString, hora: horaFallback || '--:--' };
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
